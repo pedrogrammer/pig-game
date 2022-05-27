@@ -2,6 +2,8 @@
 
 // Selecting elements
 const
+    player0Section = document.querySelector('.player-0'),
+    player1Section = document.querySelector('.player-1'),
     player0CurrentScore = document.querySelector('#current-score-0'),
     player1CurrentScore = document.querySelector('#current-score-1'),
     player0TotalScore = document.querySelector('#total-score-0'),
@@ -33,10 +35,17 @@ rollButton.addEventListener('click',function() {
     diceImage.src = `/assets/dice-${dice}.png`;
     diceImage.classList.remove('hidden');
 
-    // 3. Check for rolled 1
+    // 3. Check for rolled a 1
     if(dice !== 1) {
         // Add dice to the current score
         currentScore += dice;
         document.querySelector(`#current-score-${activePlayer}`).textContent = currentScore;
+    } else {
+        // Switch to the next player
+        document.querySelector(`#current-score-${activePlayer}`).textContent = 0;
+        currentScore = 0;
+        activePlayer = activePlayer === 0 ? 1 : 0;
+        player0Section.classList.toggle('active-player');
+        player1Section.classList.toggle('active-player');
     }
 });
