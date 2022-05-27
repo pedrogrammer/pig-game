@@ -12,6 +12,11 @@ const
     newButton = document.querySelector('.new-button')
 ;
 
+let 
+    currentScore = 0,
+    activePlayer = 0
+;
+
 // Starting conditions
 player0CurrentScore.textContent = 0;
 player1CurrentScore.textContent = 0;
@@ -27,4 +32,11 @@ rollButton.addEventListener('click',function() {
     // 2. Display dice
     diceImage.src = `/assets/dice-${dice}.png`;
     diceImage.classList.remove('hidden');
+
+    // 3. Check for rolled 1
+    if(dice !== 1) {
+        // Add dice to the current score
+        currentScore += dice;
+        document.querySelector(`#current-score-${activePlayer}`).textContent = currentScore;
+    }
 });
