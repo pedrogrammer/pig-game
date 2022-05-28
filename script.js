@@ -21,6 +21,14 @@ let
     isPlaying = true
 ;
 
+const switchPlayer = () => {
+    currentScore = 0;
+    document.querySelector(`#current-score-${activePlayer}`).textContent = 0;
+    activePlayer = activePlayer === 1 ? 0 : 1;
+    player0Section.classList.toggle('active-player');
+    player1Section.classList.toggle('active-player');
+};
+
 // Starting conditions
 player0CurrentScore.textContent = 0;
 player1CurrentScore.textContent = 0;
@@ -43,14 +51,9 @@ rollButton.addEventListener('click',function() {
             // Add dice to the current score
             currentScore += dice;
             document.querySelector(`#current-score-${activePlayer}`).textContent = currentScore;
-        } else {
+        } else
             // Switch to the next player
-            document.querySelector(`#current-score-${activePlayer}`).textContent = 0;
-            currentScore = 0;
-            activePlayer = activePlayer === 0 ? 1 : 0;
-            player0Section.classList.toggle('active-player');
-            player1Section.classList.toggle('active-player');
-        }
+            switchPlayer();
     }
 });
 
@@ -68,13 +71,8 @@ holdButton.addEventListener('click', function() {
     
             document.querySelector(`.player-${activePlayer}`).classList.add('winner-player');
             document.querySelector(`.player-${activePlayer}`).classList.remove('active-player');
-        } else {
+        } else
             // Switch to the next player
-            document.querySelector(`#current-score-${activePlayer}`).textContent = 0;
-            currentScore = 0;
-            activePlayer = activePlayer === 0 ? 1 : 0;
-            player0Section.classList.toggle('active-player');
-            player1Section.classList.toggle('active-player');
-        }
+            switchPlayer();
     }
 });
