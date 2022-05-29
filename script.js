@@ -15,11 +15,30 @@ const
 ;
 
 let 
-    totalScores = [0, 0],
-    currentScore = 0,
-    activePlayer = 0,
-    isPlaying = true
+    totalScores,
+    currentScore,
+    activePlayer,
+    isPlaying
 ;
+
+// Starting conditions
+const init = () => {
+    totalScores = [0, 0];
+    currentScore = 0;
+    activePlayer = 0;
+    isPlaying = true;
+
+    player0CurrentScore.textContent = 0;
+    player1CurrentScore.textContent = 0;
+    player0TotalScore.textContent = 0;
+    player1TotalScore.textContent = 0;
+    
+    diceImage.classList.add('hidden');
+    player0Section.classList.remove('winner-player');
+    player1Section.classList.remove('winner-player', 'active-player');
+    player0Section.classList.add('active-player');
+}
+init();
 
 const switchPlayer = () => {
     currentScore = 0;
@@ -28,13 +47,6 @@ const switchPlayer = () => {
     player0Section.classList.toggle('active-player');
     player1Section.classList.toggle('active-player');
 };
-
-// Starting conditions
-player0CurrentScore.textContent = 0;
-player1CurrentScore.textContent = 0;
-player0TotalScore.textContent = 0;
-player1TotalScore.textContent = 0;
-diceImage.classList.add('hidden');
 
 // Rolling the dice functionality
 rollButton.addEventListener('click',function() {
@@ -76,3 +88,6 @@ holdButton.addEventListener('click', function() {
             switchPlayer();
     }
 });
+
+// Resetting the game
+newButton.addEventListener('click', init);
